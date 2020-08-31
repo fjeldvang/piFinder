@@ -40,17 +40,16 @@ public class PiFinder extends JFrame {
 		 //gr.drawOval(cntrX-radius, cntrY-radius, radius*2, radius*2);
 		 //gr.drawOval(-500, -500, radius*3, radius*3);
 		 
-		 //TODO: Figure out circle to reflect 1x1 coordinate system
-		 //TODO: Figure out why red dots appear inside circle too
+		 //TODO: Figure out circle outline to reflect 1x1 coordinate system
 		 
-		 if(distance<=1) {
+		 if(Math.pow(intx, 2)+Math.pow(inty, 2)<=Math.pow(getWidth(), 2)) {
 			 gr.setColor(Color.green);
 		 }else {
 			 gr.setColor(Color.red);
 		 }
 		 gr.fillOval(intx, inty, radius/32, radius/32);
-		 System.out.println(intx);
-		 System.out.println(inty);
+		 //System.out.println(intx);
+		 //System.out.println(inty);
 	}
 
 	private void getNumber() {
