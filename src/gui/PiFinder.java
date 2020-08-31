@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -7,7 +9,6 @@ import javax.swing.JFrame;
 
 public class PiFinder extends JFrame {
 
-	//visualize in frame?
 	double pi;
 	private double x;
 	private double y;
@@ -24,10 +25,37 @@ public class PiFinder extends JFrame {
 		this.setResizable(false);
 		getNumber();
 	}
+	
+	public void paint(Graphics gr) { 
+		 //super.paint(gr);
+		
+	 	 gr.setPaintMode();
+		 int intx = (int)Math.round(x*600);
+		 int inty = (int)Math.round(y*600);
+		 int radius = getWidth()/2;
+		 
+		 //gr.setColor(Color.BLACK);
+		 //int cntrX = getWidth()/2;
+		 //int cntrY = getHeight()/2;
+		 //gr.drawOval(cntrX-radius, cntrY-radius, radius*2, radius*2);
+		 //gr.drawOval(-500, -500, radius*3, radius*3);
+		 
+		 //TODO: Figure out circle to reflect 1x1 coordinate system
+		 //TODO: Figure out why red dots appear inside circle too
+		 
+		 if(distance<=1) {
+			 gr.setColor(Color.green);
+		 }else {
+			 gr.setColor(Color.red);
+		 }
+		 gr.fillOval(intx, inty, radius/32, radius/32);
+		 System.out.println(intx);
+		 System.out.println(inty);
+	}
 
 	private void getNumber() {
+		//TODO: input via dialog instead of scanner?
 		System.out.println("Enter amount of times a coordinate will be added to estimate pi");
-		//maybe add the input via frame instead of scanner? input dialog?
 		Scanner scanner = new Scanner(System.in);
 		int a = scanner.nextInt();
 		scanner.close();
@@ -61,6 +89,7 @@ public class PiFinder extends JFrame {
 				System.out.println("");
 			}
 			numPointsTotal++;
+			this.repaint();
 		}
 	}
 	
