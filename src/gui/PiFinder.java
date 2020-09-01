@@ -16,7 +16,7 @@ public class PiFinder extends JFrame {
 	private int numPointsInCircle;
 	private int numPointsTotal;
 	
-	PiFinder(){
+	public PiFinder(){
 		System.out.println("***PiFinder***");
 		System.out.println("");
 		

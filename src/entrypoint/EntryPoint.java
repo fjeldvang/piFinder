@@ -1,4 +1,6 @@
-package gui;
+package entrypoint;
+
+import gui.PiFinder;
 
 public class EntryPoint {
 
