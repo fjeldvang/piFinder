@@ -9,7 +9,8 @@ import javax.swing.JOptionPane;
 
 public class PiFinder extends JFrame {
 	
-	//TODO: fix 
+	//TODO: menubar
+	//TODO: fix closing prompt not working
 
 	private double pi;
 	private int a;
