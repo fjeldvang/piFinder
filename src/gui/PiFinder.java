@@ -3,9 +3,9 @@ package gui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
-import java.util.Scanner;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class PiFinder extends JFrame {
 
@@ -55,13 +55,10 @@ public class PiFinder extends JFrame {
 	}
 
 	private void getNumber() {
-		//TODO: Input via dialog instead of scanner?
 		System.out.println("Enter amount of times a coordinate will be added to estimate pi");
 		
 		//scanner input
-		Scanner scanner = new Scanner(System.in);
-		int a = scanner.nextInt();
-		scanner.close();
+		int a = getInput();		
 		
 		//make coordinate calculations
 		calculateCoordinates(a);
@@ -69,6 +66,18 @@ public class PiFinder extends JFrame {
 		//calculate pi
 		pi = 4.0 * numPointsInCircle/numPointsTotal;
 		System.out.println("Approximation of pi by trying " + a + " times equals " + pi);
+	}
+
+	private int getInput() {
+		JFrame in = new JFrame();
+		int s = Integer.parseInt( (String) JOptionPane.showInputDialog(
+				in,
+                "Enter amount of times a coordinate will be added to estimate pi",
+                "Input", JOptionPane.PLAIN_MESSAGE,
+                null,
+                null, null));
+		in.dispose();
+		return s;
 	}
 
 	private void calculateCoordinates(int a) {
