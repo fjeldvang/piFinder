@@ -19,7 +19,6 @@ public class PiFinder extends JFrame {
 	private double distance;
 	private int numPointsInCircle;
 	private int numPointsTotal;
-	private int c;
 	
 	public PiFinder(){
 		System.out.println("***PiFinder***");
@@ -40,8 +39,8 @@ public class PiFinder extends JFrame {
 	 	 gr.setPaintMode();
 	 	 
 	 	 //convert double coordinate to closest pixel
-		 int intx = (int)Math.round(x*getWidth());
-		 int inty = (int)Math.round(y*getHeight());
+		 int intx = (int)Math.round(this.x*getWidth());
+		 int inty = (int)Math.round(this.y*getHeight());
 		 int radius = getWidth()/2;
 		 
 		 //draw outline
@@ -66,17 +65,18 @@ public class PiFinder extends JFrame {
 		getInteger();		
 		
 		//make coordinate calculations
-		calculateCoordinates(a);
+		calculateCoordinates(this.a);
 		
 		//calculate pi
-		pi = 4.0 * numPointsInCircle/numPointsTotal;
-		System.out.println("Approximation of pi by trying " + a + " times equals " + pi);
+		this.pi = 4.0 * this.numPointsInCircle/this.numPointsTotal;
+		System.out.println("Approximation of pi by trying " + this.a + " times equals " + this.pi);
 	}
 
 	private void getInteger() {
 		JFrame in = new JFrame();
 		try {
-		c = Integer.parseInt((String) JOptionPane.showInputDialog(
+			//get from input dialog
+			this.a = Integer.parseInt((String) JOptionPane.showInputDialog(
 				in,
                 "Enter amount of times a coordinate will be added to estimate pi",
                 "PiFinder", 
@@ -86,17 +86,13 @@ public class PiFinder extends JFrame {
                 null));
 		}
 		catch(NumberFormatException e) {
+			//try again
 			System.out.println("Input is not an integer, please try again");
 			JFrame fn = new JFrame();
 		    JOptionPane.showMessageDialog(fn, "Input is not an integer, please try again");
 			getInteger();
 		}
-		setInt(c);
 		in.dispose();
-	}
-
-	private void setInt(int c) {
-		this.a = c;
 	}
 
 	private void calculateCoordinates(int a) {
@@ -106,18 +102,18 @@ public class PiFinder extends JFrame {
 		for(int i=0;i<a;i++) {
 			
 			//get random coordinates
-			x = r.nextDouble();
-			y = r.nextDouble();
+			this.x = r.nextDouble();
+			this.y = r.nextDouble();
 			
-			System.out.println("x = "+x);
-			System.out.println("y = "+y);
+			System.out.println("x = "+this.x);
+			System.out.println("y = "+this.y);
 			
-			distance = Math.pow(Math.pow(x, z) + Math.pow(y, z),z);
-			System.out.println("Distance = "+distance);
+			this.distance = Math.pow(Math.pow(this.x, z) + Math.pow(this.y, z),z);
+			System.out.println("Distance = "+this.distance);
 			
 			//find if inside circle or not
-			if(distance<=1) {
-				numPointsInCircle++;
+			if(this.distance<=1) {
+				this.numPointsInCircle++;
 				System.out.println("Number inside");
 				System.out.println("");
 			} 
@@ -125,7 +121,7 @@ public class PiFinder extends JFrame {
 				System.out.println("Number outside");
 				System.out.println("");
 			}
-			numPointsTotal++;
+			this.numPointsTotal++;
 			this.repaint();
 		}
 	}
