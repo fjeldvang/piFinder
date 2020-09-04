@@ -26,7 +26,7 @@ public class PiFinder extends JFrame {
 		this.setVisible(true);
 		this.setResizable(false);
 		
-		//get number from scanner
+		//get number from input dialog
 		getNumber();
 	}
 	
