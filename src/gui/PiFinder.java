@@ -21,7 +21,7 @@ public class PiFinder extends JFrame {
 		System.out.println("");
 		
 		//setup frame
-		this.setSize(600, 600);
+		this.setSize(1000, 1000);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		this.setResizable(false);
@@ -32,25 +32,25 @@ public class PiFinder extends JFrame {
 	
 	public void paint(Graphics gr) { 
 		 //super.paint(gr);
-		
 	 	 gr.setPaintMode();
-		 int intx = (int)Math.round(x*600);
-		 int inty = (int)Math.round(y*600);
+	 	 
+	 	 //convert double coordinate to closest pixel
+		 int intx = (int)Math.round(x*getWidth());
+		 int inty = (int)Math.round(y*getHeight());
 		 int radius = getWidth()/2;
 		 
-		 //gr.setColor(Color.BLACK);
-		 //int cntrX = getWidth()/2;
-		 //int cntrY = getHeight()/2;
-		 //gr.drawOval(cntrX-radius, cntrY-radius, radius*2, radius*2);
+		 //draw outline
+		 gr.setColor(Color.BLACK);
+		 gr.drawOval(-getWidth(), -getHeight(), radius*4, radius*4);
 		 
-		 //TODO: Figure out circle outline to reflect 1x1 coordinate system
-		 
+		 //decide if x^2 + y^2 coordinates within circle
 		 if(Math.pow(intx, 2)+Math.pow(inty, 2)<=Math.pow(getWidth(), 2)) {
 			 gr.setColor(Color.green);
 		 } 
 		 else {
 			 gr.setColor(Color.red);
 		 }
+		 //draw coordinate
 		 gr.fillOval(intx, inty, radius/128, radius/128);
 	}
 
