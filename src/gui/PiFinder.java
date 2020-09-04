@@ -9,12 +9,14 @@ import javax.swing.JOptionPane;
 
 public class PiFinder extends JFrame {
 
-	double pi;
+	private double pi;
+	private int a;
 	private double x;
 	private double y;
 	private double distance;
 	private int numPointsInCircle;
 	private int numPointsTotal;
+	private int c = 0;
 	
 	public PiFinder(){
 		System.out.println("***PiFinder***");
@@ -57,8 +59,8 @@ public class PiFinder extends JFrame {
 	private void getNumber() {
 		System.out.println("Enter amount of times a coordinate will be added to estimate pi");
 		
-		//scanner input
-		int a = getInput();		
+		//get from inputdialog
+		getInteger();		
 		
 		//make coordinate calculations
 		calculateCoordinates(a);
@@ -68,16 +70,33 @@ public class PiFinder extends JFrame {
 		System.out.println("Approximation of pi by trying " + a + " times equals " + pi);
 	}
 
-	private int getInput() {
+	private void getInteger() {
 		JFrame in = new JFrame();
-		int s = Integer.parseInt( (String) JOptionPane.showInputDialog(
+		try {
+		int c = Integer.parseInt((String) JOptionPane.showInputDialog(
 				in,
                 "Enter amount of times a coordinate will be added to estimate pi",
-                "Input", JOptionPane.PLAIN_MESSAGE,
+                "PiFinder", 
+                JOptionPane.PLAIN_MESSAGE,
                 null,
-                null, null));
+                null, 
+                null));
+			setInt(c);
+		}
+		catch(NumberFormatException e) {		    
+			if(c!= 0) {
+				System.out.println("Input is not an integer, please try again");
+				JFrame fn = new JFrame();
+			    JOptionPane.showMessageDialog(fn, "Input is not an integer, please try again");
+				getInteger();
+				}
+		}
 		in.dispose();
-		return s;
+		this.dispose();
+	}
+
+	private void setInt(int c) {
+		this.a = c;
 	}
 
 	private void calculateCoordinates(int a) {
