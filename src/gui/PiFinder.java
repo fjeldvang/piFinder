@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 public class PiFinder extends JFrame {
 	
 	//TODO: menubar
-	//TODO: fix closing prompt not working
 
 	private double pi;
 	private int a;
@@ -49,10 +48,10 @@ public class PiFinder extends JFrame {
 		 
 		 //decide if x^2 + y^2 coordinates within circle
 		 if(Math.pow(intx, 2)+Math.pow(inty, 2)<=Math.pow(getWidth(), 2)) {
-			 gr.setColor(Color.green);
+			 gr.setColor(Color.BLUE);
 		 } 
 		 else {
-			 gr.setColor(Color.red);
+			 gr.setColor(Color.RED);
 		 }
 		 //draw coordinate
 		 gr.fillOval(intx, inty, radius/128, radius/128);
@@ -70,27 +69,37 @@ public class PiFinder extends JFrame {
 		//calculate pi
 		this.pi = 4.0 * this.numPointsInCircle/this.numPointsTotal;
 		System.out.println("Approximation of pi by trying " + this.a + " times equals " + this.pi);
+
+		JFrame compl = new JFrame();
+	    JOptionPane.showMessageDialog(compl, "Complete!\n" + "Approximation of pi by trying " + this.a + " times equals " + this.pi);
 	}
 
 	private void getInteger() {
 		JFrame in = new JFrame();
+		String s;
+		
 		try {
 			//get from input dialog
-			this.a = Integer.parseInt((String) JOptionPane.showInputDialog(
+			s = (String) JOptionPane.showInputDialog(
 				in,
                 "Enter amount of times a coordinate will be added to estimate pi",
                 "PiFinder", 
                 JOptionPane.PLAIN_MESSAGE,
                 null,
                 null, 
-                null));
+                null);
+			if(s == null) {
+				System.exit(0);
+			} else {
+			this.a = Integer.parseInt(s);
+			}
 		}
 		catch(NumberFormatException e) {
 			//try again
-			System.out.println("Input is not an integer, please try again");
+			System.out.println("Input is not an integer, please try again.");
 			JFrame fn = new JFrame();
-		    JOptionPane.showMessageDialog(fn, "Input is not an integer, please try again");
-			getInteger();
+		    JOptionPane.showMessageDialog(fn, "Input is not an integer, please try again.");
+			System.exit(0);
 		}
 		in.dispose();
 	}
@@ -124,6 +133,7 @@ public class PiFinder extends JFrame {
 			this.numPointsTotal++;
 			this.repaint();
 		}
+
 	}
 	
 }
